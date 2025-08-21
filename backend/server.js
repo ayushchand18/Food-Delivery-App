@@ -40,7 +40,4 @@ app.listen(port, () => {
 });
 
 
-app.listen(port, () => {
-  console.log(`Server Started on http://localhost:${port}`);
-});
 
