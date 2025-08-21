@@ -4,8 +4,8 @@ Mealio is a dynamic food ordering website built with the MERN Stack. It offers a
 
 ## Demo
 
-- User Panel: [(https://food-delivery-website-theta-eight.vercel.app/)]
-- Admin Panel: [(https://food-delivery-website-xeh7.vercel.app/)]
+- User Panel: [https://food-delivery-app-omega-sand.vercel.app/]
+- Admin Panel: [https://food-delivery-website-xeh7.vercel.app/]
 
 ## Features
 
