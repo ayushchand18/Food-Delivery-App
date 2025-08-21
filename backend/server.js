@@ -15,7 +15,7 @@ const port = process.env.PORT;
 // middlewares
 app.use(express.json());
 app.use(cors({
-  origin: ['https://food-delivery-app-beta-eight.vercel.app/'], 
+  origin: ['https://food-delivery-app-beta-eight.vercel.app'], 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true  
 }));
