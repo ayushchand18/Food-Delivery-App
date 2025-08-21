@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/group/:groupId", "destination": "/" },
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
