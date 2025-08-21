@@ -16,7 +16,7 @@ const App = () => {
   const [showLogin, setShowLogin] = useState(false);
   return (
     <>
-      {showLogin ? <LoginPopup setShowLogin={setShowLogin} /> : <></>}
+      {showLogin ? <LoginPopup setShowLogin={setShowLogin} /> : null}
       <div className="app">
         <ToastContainer />
         <Navbar setShowLogin={setShowLogin} />
@@ -35,3 +35,4 @@ const App = () => {
 };
 
 export default App;
+
