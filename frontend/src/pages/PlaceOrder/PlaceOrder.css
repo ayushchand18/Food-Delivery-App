@@ -17,17 +17,22 @@
     margin-bottom: 50px;
 }
 
-.place-order-left input{
+.place-order-left input,
+.modern-input,
+.modern-select {
     margin-bottom: 12px; 
     width: 100%;
     padding: 10px 12px;
     border: 1px solid #d8d8d8;
     border-radius: 8px;
+    background: #fff;
     outline: none;
     transition: border-color .2s, box-shadow .2s;
 }
 
-.place-order-left input:focus{
+.place-order-left input:focus,
+.modern-input:focus,
+.modern-select:focus {
     border-color: tomato;
     box-shadow: 0 0 0 3px rgba(255,99,71,0.15);
 }
@@ -39,7 +44,7 @@
 
 .place-order-left .multi-fields input{
     flex: 1;
-    margin-bottom: 12px; 
+    margin-bottom: 12px;
 }
 
 .place-order-right{
@@ -61,73 +66,37 @@
 .order-settings .two-col{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 16px; 
 }
 
-.place-order-left .two-col{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-}
-
-.order-settings .two-col .field,
-.place-order-left .two-col .field{
-    margin-bottom: 0;
-}
-
-.place-order-left .field,
-.place-order-left .multi-fields,
-.place-order-left .two-col{
-    margin-bottom: 0;
+.order-settings .field,
+.place-order-left .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px; 
 }
 
 .place-order-left .order-settings > * + *{
     margin-top: 12px;
 }
 
-.order-settings .field{
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.order-settings .field label{
-    font-size: 13px;
-    color: #666;
-}
-
+.order-settings .field label,
 .place-order-left .field label{
     font-size: 13px;
     color: #666;
 }
 
-.modern-select, .modern-input{
-    width: 100%;
-    padding: 1px 10px;
-    border: 1px solid #d8d8d8;
-    border-radius: 8px;
-    background: #fff;
-    outline: none;
-    transition: border-color .2s, box-shadow .2s;
-}
-
 .modern-select{
     height: 40px;
     line-height: 40px;
-}
-
-.modern-select:focus, .modern-input:focus{
-    border-color: tomato;
-    box-shadow: 0 0 0 3px rgba(255,99,71,0.15);
-}
-
-.modern-select{
     appearance: none;
     background-image: url('data:image/svg+xml;utf8,<svg fill="%23666" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 16px 16px;
 }
+
 @media (max-width:800px) {
     .place-order{
         flex-direction: column;
@@ -140,5 +109,3 @@
         grid-template-columns: 1fr;
     }
 }
-
-
