@@ -4,14 +4,28 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+
+const RENDER_BACKEND_URL = "https://food-delivery-app-7aee.onrender.com";  
+
 const GroupOrder = () => {
-  const { url, token, food_list } = useContext(StoreContext);
+  const { token, food_list } = useContext(StoreContext); 
   const { groupId } = useParams();
   const [group, setGroup] = useState(null);
+  const [loading, setLoading] = useState(true);  
 
   const fetchGroup = async () => {
-    const res = await axios.get(`${url}/api/group/${groupId}`);
-    if (res.data.success) setGroup(res.data.data);
+    try {
+      const res = await axios.get(`${RENDER_BACKEND_URL}/api/group/${groupId}`);
+      if (res.data.success) {
+        setGroup(res.data.data);
+      } else {
+        toast.error(res.data.message || "Failed to load group");
+      }
+    } catch (error) {
+      toast.error("Error fetching group: " + error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -20,88 +34,105 @@ const GroupOrder = () => {
 
   const onAdd = async (itemId) => {
     if (!token) return toast.error("Login required");
-    const res = await axios.post(
-      `${url}/api/group/${groupId}/add`,
-      { itemId, quantity: 1 },
-      { headers: { token } }
-    );
-    if (res.data.success) {
-      toast.success("Added to group");
-      setGroup(res.data.data);
-    } else toast.error(res.data.message || "Error");
+    try {
+      const res = await axios.post(
+        `${RENDER_BACKEND_URL}/api/group/${groupId}/add`,
+        { itemId, quantity: 1 },
+        { headers: { token } }
+      );
+      if (res.data.success) {
+        toast.success("Added to group");
+        setGroup(res.data.data);
+      } else toast.error(res.data.message || "Error");
+    } catch (error) {
+      toast.error("Error adding item: " + error.message);
+    }
   };
 
   const isCreator = useMemo(() => {
-    return group && group.creatorUserId && token; // server re-checks auth on import/close
+    return group && group.creatorUserId && token; 
   }, [group, token]);
 
   const onImport = async () => {
-    const res = await axios.post(
-      `${url}/api/group/${groupId}/import`,
-      {},
-      { headers: { token } }
-    );
-    if (res.data.success) toast.success("Imported group items to your cart");
-    else toast.error(res.data.message || "Error");
+    try {
+      const res = await axios.post(
+        `${RENDER_BACKEND_URL}/api/group/${groupId}/import`,
+        {},
+        { headers: { token } }
+      );
+      if (res.data.success) toast.success("Imported group items to your cart");
+      else toast.error(res.data.message || "Error");
+    } catch (error) {
+      toast.error("Error importing: " + error.message);
+    }
   };
-  const onCopy = async ()=>{
-    const link = window.location.origin+`/group/${groupId}`;
-    try{
+
+  const onCopy = async () => {
+    const link = window.location.origin + `/group/${groupId}`;
+    try {
       await navigator.clipboard.writeText(link);
       toast.success('Link copied');
-    }catch{
+    } catch {
       toast.error('Copy failed');
     }
-  }
-  const onClose = async ()=>{
-    const res = await axios.post(
-      `${url}/api/group/${groupId}/close`,
-      {},
-      { headers: { token } }
-    );
-    if(res.data.success){ setGroup(res.data.data); toast.success('Group closed'); }
-    else toast.error(res.data.message || 'Error');
-  }
+  };
 
-  if (!group) return <div className="container" style={{marginTop:100}}>Loading...</div>;
+  const onClose = async () => {
+    try {
+      const res = await axios.post(
+        `${RENDER_BACKEND_URL}/api/group/${groupId}/close`,
+        {},
+        { headers: { token } }
+      );
+      if (res.data.success) {
+        setGroup(res.data.data);
+        toast.success('Group closed');
+      } else toast.error(res.data.message || 'Error');
+    } catch (error) {
+      toast.error("Error closing group: " + error.message);
+    }
+  };
+
+  if (loading) return <div className="container" style={{ marginTop: 100 }}>Loading...</div>;
+  if (!group) return <div className="container" style={{ marginTop: 100 }}>Group not found</div>;  
 
   return (
-    <div className="container" style={{marginTop:100}}>
+    <div className="container" style={{ marginTop: 100 }}>
       <h2>Group Order: {group.groupId}</h2>
-      <div style={{display:'flex', alignItems:'center', gap:8}}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <p>Status: {group.status}</p>
-        <button onClick={onCopy} style={{marginLeft:8, background:'#f2f2f2', border:'1px solid #e5e5e5', padding:'6px 10px', borderRadius:6, cursor:'pointer'}}>Copy Share Link</button>
-        {isCreator && group.status==='open' && (
-          <button onClick={onClose} style={{background:'#222', color:'#fff', border:'none', padding:'6px 10px', borderRadius:6, cursor:'pointer'}}>Close Group</button>
+        <button onClick={onCopy} style={{ marginLeft: 8, background: '#f2f2f2', border: '1px solid #e5e5e5', padding: '6px 10px', borderRadius: 6, cursor: 'pointer' }}>Copy Share Link</button>
+        {isCreator && group.status === 'open' && (
+          <button onClick={onClose} style={{ background: '#222', color: '#fff', border: 'none', padding: '6px 10px', borderRadius: 6, cursor: 'pointer' }}>Close Group</button>
         )}
       </div>
-      <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill, minmax(220px, 1fr))', gap:16, marginTop:16}}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 16, marginTop: 16 }}>
         {food_list.map(item => (
-          <div key={item._id} style={{border:'1px solid #eee', borderRadius:8, padding:12, background:'#fff', height: 320, display:'flex', flexDirection:'column'}}>
-            <img src={`${url}/images/${item.image}`} alt={item.name} style={{width:'100%', height: 160, objectFit:'cover', borderRadius:6, marginBottom:8}}/>
-            <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginTop:'auto'}}>
+          <div key={item._id} style={{ border: '1px solid #eee', borderRadius: 8, padding: 12, background: '#fff', height: 320, display: 'flex', flexDirection: 'column' }}>
+            <img src={`${RENDER_BACKEND_URL}/images/${item.image}`} alt={item.name} style={{ width: '100%', height: 160, objectFit: 'cover', borderRadius: 6, marginBottom: 8 }} />  {/* Updated to use Render URL for images */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' }}>
               <div>
-                <div style={{fontWeight:600}}>{item.name}</div>
-                <div style={{color:'#666'}}>${item.price}</div>
+                <div style={{ fontWeight: 600 }}>{item.name}</div>
+                <div style={{ color: '#666' }}>${item.price}</div>
               </div>
-              <button onClick={()=>onAdd(item._id)} style={{background:'tomato', color:'#fff', border:'none', padding:'8px 12px', borderRadius:6, cursor:'pointer'}}>Add</button>
+              <button onClick={() => onAdd(item._id)} style={{ background: 'tomato', color: '#fff', border: 'none', padding: '8px 12px', borderRadius: 6, cursor: 'pointer' }}>Add</button>
             </div>
           </div>
         ))}
       </div>
-      <div style={{marginTop:24}}>
+      <div style={{ marginTop: 24 }}>
         <h3>Current Items</h3>
         {group.items.length === 0 && <p>No items yet. Share this link to collect items.</p>}
         {group.items.map((it, idx) => (
-          <div key={idx} style={{display:'flex', justifyContent:'space-between', borderBottom:'1px solid #eee', padding:'8px 0'}}>
+          <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #eee', padding: '8px 0' }}>
             <span>{it.name} x {it.quantity}</span>
             <span>${it.price * it.quantity}</span>
           </div>
         ))}
       </div>
       {isCreator && (
-        <div style={{marginTop:16, display:'flex', gap:12}}>
-          <button onClick={onImport} style={{background:'black', color:'#fff', border:'none', padding:'10px 14px', borderRadius:6, cursor:'pointer'}}>Import To My Cart</button>
+        <div style={{ marginTop: 16, display: 'flex', gap: 12 }}>
+          <button onClick={onImport} style={{ background: 'black', color: '#fff', border: 'none', padding: '10px 14px', borderRadius: 6, cursor: 'pointer' }}>Import To My Cart</button>
         </div>
       )}
     </div>
@@ -109,5 +140,3 @@ const GroupOrder = () => {
 };
 
 export default GroupOrder;
-
-
