@@ -64,6 +64,20 @@ const Orders = ({ url }) => {
                   }
                 })}
               </p>
+              {order.orderType === 'bulk' && (
+                <>
+                  <p className="order-item-name"><b>Bulk Order</b>{order.companyName?` - ${order.companyName}`:""}{order.department?` (${order.department})`:""}</p>
+                  {order.bulkOrderBy && (
+                    <p className="order-item-phone">Handled by: {order.bulkOrderBy === 'company' ? 'Company' : 'Individuals'}</p>
+                  )}
+                  {order.companyDeliveryAddress && (
+                    <p className="order-item-phone">Company Address: {order.companyDeliveryAddress}</p>
+                  )}
+                  {order.companyFloor && (
+                    <p className="order-item-phone">Floor: {order.companyFloor}</p>
+                  )}
+                </>
+              )}
               <p className="order-item-name">
                 {order.address.firstName + " " + order.address.lastName}
               </p>
@@ -80,6 +94,15 @@ const Orders = ({ url }) => {
                 </p>
               </div>
               <p className="order-item-phone">{order.address.phone}</p>
+              {order.deliveryTime && (
+                <p className="order-item-phone">Delivery Time: {new Date(order.deliveryTime).toLocaleString()}</p>
+              )}
+              {order.bulkNote && (
+                <p className="order-item-phone">Note: {order.bulkNote}</p>
+              )}
+              {order.paymentMode && (
+                <p className="order-item-phone">Payment Mode: {order.paymentMode}</p>
+              )}
             </div>
             <p>Items: {order.items.length}</p>
             <p>${order.amount}</p>

@@ -13,6 +13,23 @@ const placeOrder = async (req, res) => {
       items: req.body.items,
       amount: req.body.amount,
       address: req.body.address,
+      orderType: req.body.orderType || "individual",
+      bulkOrderBy: req.body.bulkOrderBy,
+      companyName: req.body.companyName,
+      department: req.body.department,
+      companyDeliveryAddress: req.body.companyDeliveryAddress,
+      companyFloor: req.body.companyFloor,
+      companyCity: req.body.companyCity,
+      companyState: req.body.companyState,
+      companyPincode: req.body.companyPincode,
+      companyCountry: req.body.companyCountry,
+      companyEmail: req.body.companyEmail,
+      companyPhone: req.body.companyPhone,
+      contactName: req.body.contactName,
+      contactPhone: req.body.contactPhone,
+      deliveryTime: req.body.deliveryTime,
+      paymentMode: req.body.paymentMode || "online",
+      bulkNote: req.body.bulkNote,
     });
     await newOrder.save();
     await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
@@ -39,14 +56,17 @@ const placeOrder = async (req, res) => {
       quantity: 1,
     });
 
-    const session = await stripe.checkout.sessions.create({
-      line_items: line_items,
-      mode: "payment",
-      success_url: `${frontend_url}/verify?success=true&orderId=${newOrder._id}`,
-      cancel_url: `${frontend_url}/verify?success=false&orderId=${newOrder._id}`,
-    });
+    let session = null;
+    if ((req.body.paymentMode || "online") === "online") {
+      session = await stripe.checkout.sessions.create({
+        line_items: line_items,
+        mode: "payment",
+        success_url: `${frontend_url}/verify?success=true&orderId=${newOrder._id}`,
+        cancel_url: `${frontend_url}/verify?success=false&orderId=${newOrder._id}`,
+      });
+    }
 
-    res.json({ success: true, session_url: session.url });
+    res.json({ success: true, session_url: session ? session.url : null });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: "Error" });

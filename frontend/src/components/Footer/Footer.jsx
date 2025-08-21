@@ -7,12 +7,10 @@ const Footer = () => {
     <div className="footer" id="footer">
       <div className="footer-content">
         <div className="footer-content-left">
-          <img src={assets.logo} alt="" />
+          <img src={assets.logo} alt="" class="footer-logo" />
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque
-            nostrum iure suscipit maiores non harum incidunt unde magnam
-            molestias ipsum qui vel aut natus aspernatur ipsa dignissimos,
-            numquam assumenda deserunt.
+            Bringing delicious meals to your doorstep, every single day. 
+            Fast delivery, quality food, and customer satisfaction are at the heart of everything we do.
           </p>
           <div className="footer-social-icons">
             <img src={assets.facebook_icon} alt="" />
@@ -33,13 +31,13 @@ const Footer = () => {
           <h2>Get in touch</h2>
           <ul>
             <li>+92-308-4900522</li>
-            <li>contact@tomato.com</li>
+            <li>contact@mealio.com</li>
           </ul>
         </div>
       </div>
       <hr />
       <p className="footer-copyright">
-        Copyright 2024 @ Tomato.com - All Right Reserved.
+        Copyright 2024 @ Mealio.com - All Right Reserved.
       </p>
     </div>
   );

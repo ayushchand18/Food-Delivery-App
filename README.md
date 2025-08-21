@@ -1,11 +1,11 @@
-# TOMATO - Food Ordering Website
+# MEALIO - Food Ordering Website
 
-This repository hosts the source code for TOMATO, a dynamic food ordering website built with the MERN Stack. It offers a user-friendly platform for seamless online food ordering.
+Mealio is a dynamic food ordering website built with the MERN Stack. It offers a user-friendly platform for seamless online food ordering.
 
 ## Demo
 
-- User Panel: [https://food-delivery-frontend-s2l9.onrender.com/](https://food-delivery-frontend-s2l9.onrender.com/)
-- Admin Panel: [https://food-delivery-admin-wrme.onrender.com/](https://food-delivery-admin-wrme.onrender.com/)
+- User Panel: [(https://food-delivery-website-theta-eight.vercel.app/)]
+- Admin Panel: [(https://food-delivery-website-xeh7.vercel.app/)]
 
 ## Features
 
@@ -27,31 +27,17 @@ This repository hosts the source code for TOMATO, a dynamic food ordering websit
 - Role-Based Identification
 - Beautiful Alerts
 
-## Screenshots
-
-![Hero](https://i.ibb.co/59cwY75/food-hero.png)
-- Hero Section
-
-![Products](https://i.ibb.co/JnNQPyQ/food-products.png)
-- Products Section
-
-![Cart](https://i.ibb.co/t2LrQ8p/food-cart.png)
-- Cart Page
-
-![Login](https://i.ibb.co/s6PgwkZ/food-login.png)
-- Login Popup
-
 ## Run Locally
 
 Clone the project
 
 ```bash
-    git clone https://github.com/Mshandev/Food-Delivery
+    git clone https://github.com/ayushchand18/Food-Delivery-Website
 ```
 Go to the project directory
 
 ```bash
-    cd Food-Delivery
+    cd Food-Delivery-Website
 ```
 Install dependencies (frontend)
 
@@ -75,7 +61,6 @@ Setup Environment Vaiables
 
 ```Make .env file in "backend" folder and store environment Variables
   JWT_SECRET=YOUR_SECRET_TEXT
-  SALT=YOUR_SALT_VALUE
   MONGO_URL=YOUR_DATABASE_URL
   STRIPE_SECRET_KEY=YOUR_KEY
  ```
@@ -93,20 +78,15 @@ Setup the Frontend and Backend URL
 Start the Backend server
 
 ```bash
-    nodemon server.js
+    npm start
 ```
 
 Start the Frontend server
 
 ```bash
-    npm start
+    npm run dev
 ```
 
-Start the Backend server
-
-```bash
-    npm start
-```
 ## Tech Stack
 * [React](https://reactjs.org/)
 * [Node.js](https://nodejs.org/en)
@@ -116,15 +96,6 @@ Start the Backend server
 * [JWT-Authentication](https://jwt.io/introduction)
 * [Multer](https://www.npmjs.com/package/multer)
 
-## Deployment
 
-The application is deployed on Render.
 
-## Contributing
-
-Contributions are always welcome!
-Just raise an issue, and we will discuss it.
-
-## Feedback
-
-If you have any feedback, please reach out to me [here](https://www.linkedin.com/in/muhammad-shan-full-stack-developer/)
+If you have any feedback, please reach out to me [here](https://www.linkedin.com/in/ayush-chand-46000722a)
