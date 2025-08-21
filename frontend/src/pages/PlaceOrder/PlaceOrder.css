@@ -20,13 +20,14 @@
 .place-order-left input,
 .modern-input,
 .modern-select {
-    margin-bottom: 12px; 
+    margin-bottom: 10px;
     width: 100%;
-    padding: 10px 12px;
+    padding: 8px 10px;
     border: 1px solid #d8d8d8;
-    border-radius: 8px;
+    border-radius: 6px;
     background: #fff;
     outline: none;
+    font-size: 14px;
     transition: border-color .2s, box-shadow .2s;
 }
 
@@ -34,7 +35,7 @@
 .modern-input:focus,
 .modern-select:focus {
     border-color: tomato;
-    box-shadow: 0 0 0 3px rgba(255,99,71,0.15);
+    box-shadow: 0 0 0 2px rgba(255,99,71,0.15);
 }
 
 .place-order-left .multi-fields{
@@ -44,7 +45,7 @@
 
 .place-order-left .multi-fields input{
     flex: 1;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .place-order-right{
@@ -59,42 +60,47 @@
 .order-settings{
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 6px;
     margin-bottom: 10px;
 }
 
 .order-settings .two-col{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px; 
+    gap: 12px;
 }
 
 .order-settings .field,
 .place-order-left .field {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    margin-bottom: 12px; 
-}
-
-.place-order-left .order-settings > * + *{
-    margin-top: 12px;
+    gap: 4px;
+    margin-bottom: 8px;
 }
 
 .order-settings .field label,
 .place-order-left .field label{
     font-size: 13px;
-    color: #666;
+    font-weight: 500;
+    color: #555;
 }
 
 .modern-select{
-    height: 40px;
-    line-height: 40px;
+    height: auto;
+    line-height: normal;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 14px;
     appearance: none;
     background-image: url('data:image/svg+xml;utf8,<svg fill="%23666" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
     background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 16px 16px;
+    background-position: right 8px center;
+    background-size: 14px 14px;
+}
+
+.modern-select:focus, .modern-input:focus{
+    border-color: tomato;
+    box-shadow: 0 0 0 2px rgba(255,99,71,0.15);
 }
 
 @media (max-width:800px) {
