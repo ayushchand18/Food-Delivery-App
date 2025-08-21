@@ -10,11 +10,15 @@ import groupRouter from "./routes/groupOrderRoute.js";
 
 // app config
 const app = express();
-const port =process.env.PORT || 4000;
+const port = process.env.PORT || 4000;
 
-//middlewares
+// middlewares
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: ['https://food-delivery-app-beta-eight.vercel.app/'], 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true  
+}));
 
 // DB connection
 connectDB();
@@ -30,6 +34,11 @@ app.use("/api/group", groupRouter);
 app.get("/", (req, res) => {
   res.send("API Working");
 });
+
+app.listen(port, () => {
+  console.log(`Server Started on http://localhost:${port}`);
+});
+
 
 app.listen(port, () => {
   console.log(`Server Started on http://localhost:${port}`);
