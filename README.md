@@ -1,10 +1,10 @@
 # MEALIO - Food Ordering Website
 
-Mealio is a dynamic food ordering website built with the MERN Stack. It offers a user-friendly platform for seamless online food ordering.
+Mealio is a modern food delivery web application designed with a unique group ordering feature. Along with standard food ordering, users can create a group order session and share a link with friends or colleagues. Each participant can add their preferred items, and the group creator can then import all selections into their cart and place a single order for everyone. This makes Mealio especially convenient for office lunches, family meals, or group hangouts, ensuring a seamless and collaborative food ordering experience.
 
 ## Demo
 
-- User Panel: [https://food-delivery-app-omega-sand.vercel.app/]
+- User Panel: [https://food-delivery-app-beta-eight.vercel.app/]
 - Admin Panel: [https://food-delivery-website-xeh7.vercel.app/]
 
 ## Features
