@@ -5,7 +5,7 @@ Mealio is a modern food delivery web application designed with a unique group or
 ## Demo
 
 - User Panel: [https://food-delivery-app-beta-eight.vercel.app/]
-- Admin Panel: [https://food-delivery-website-xeh7.vercel.app/]
+- Admin Panel: [https://food-delivery-website-admin-one.vercel.app/]
 
 ## Features
 
